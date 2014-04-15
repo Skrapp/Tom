@@ -28,6 +28,26 @@ var isCollidingCB = function(first,second)
 };
 
 //basic stuff
+    
+//Home
+var Home = function(x,y,color){
+    this.x = x;
+    this.y = y;
+    this.height = 23;
+    this.width = 23;
+    this.color = color;
+    
+    this.draw = function() {
+        graphics.fill (this.color);
+        graphics.rect(this.x, this.y, this.width, this.height);
+    };
+};
+
+var homes = [
+    new Home(homex, homey, "FFA3A3"),
+    new Home(357, homey, "A3A3FF")
+];
+
 var Player = function(){
     this.x = 111;
     this.y = 30;
@@ -43,6 +63,7 @@ var Player = function(){
     this.keyDown = 0;
     this.keyLeft = 0;
     this.keyRight = 0;
+    this.home = null;
 
  
     this.draw = function() {
@@ -60,6 +81,7 @@ var tom = new Player();
     tom.keyDown = input.keyCodes.down;
     tom.keyLeft = input.keyCodes.left;
     tom.keyRight = input.keyCodes.right;
+    tom.home = homes [0];
 
 var ola = new Player();
     ola.color = "0000FF";
@@ -69,6 +91,7 @@ var ola = new Player();
     ola.keyDown = input.keyCodes.s;
     ola.keyLeft = input.keyCodes.a;
     ola.keyRight = input.keyCodes.d;
+    ola.home = homes [1];
 
 var players = [
     tom,
@@ -154,25 +177,6 @@ var flagSpot = function(x,y,width,height){
 var flagSpots = [
     new flagSpot(flagy,flagx,30,30)
 ];
-    
-//Home
-var Home = function(x,y,color){
-    this.x = x;
-    this.y = y;
-    this.height = 23;
-    this.width = 23;
-    this.color = color;
-    
-    this.draw = function() {
-        graphics.fill (this.color);
-        graphics.rect(this.x, this.y, this.width, this.height);
-    };
-};
-
-var homes = [
-    new Home(homex, homey, "FFA3A3"),
-    new Home(357, homey, "A3A3FF")
-];
 
 var update = function() {
     
@@ -217,7 +221,6 @@ for(var i=0;i<solids.length;i++) {
     }/**/
 }
 
-var house = homes[0];
 var flag = flagSpots[0];
     
 //Flag capture
@@ -229,7 +232,7 @@ for (p in players){
     }
  
 //Flag collecting
-    if (isCollidingCB(player,house)){
+    if (isCollidingCB(player,player.home)){
         player.isHome=true;
     }
     else{
@@ -276,7 +279,7 @@ var draw = function() {
 
     graphics.fill("000000");
         graphics.text(tom.points,5,20);
-        graphics.text(ola.points,390,20);
+        graphics.text(ola.points,384,20);
 };
 
 
