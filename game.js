@@ -39,12 +39,41 @@ var Player = function(){
     this.isHome = false;
     this.points = 0;
     this.color = "FF0000";
-    
+    this.keyUp = 0;
+    this.keyDown = 0;
+    this.keyLeft = 0;
+    this.keyRight = 0;
+
+ 
     this.draw = function() {
         graphics.fill (this.color);
         graphics.ellipse (this.x,this.y,this.height/2);
     };
 };
+
+
+var tom = new Player();
+    tom.color = "FF0000";
+    tom.x =32;
+    tom.y = 32;
+    tom.keyUp = input.keyCodes.up;
+    tom.keyDown = input.keyCodes.down;
+    tom.keyLeft = input.keyCodes.left;
+    tom.keyRight = input.keyCodes.right;
+
+var ola = new Player();
+    ola.color = "0000FF";
+    ola.x = 368;
+    ola.y = 32;
+    ola.keyUp = input.keyCodes.w;
+    ola.keyDown = input.keyCodes.s;
+    ola.keyLeft = input.keyCodes.a;
+    ola.keyRight = input.keyCodes.d;
+
+var players = [
+    tom,
+    ola
+];
 
 //Block
 var Solid = function(x,y,width,height) {
@@ -61,62 +90,53 @@ var Solid = function(x,y,width,height) {
 };
 
 var solids = [
-        new Solid(43,43,20,20),
-        new Solid(337,43,20,20),
-        new Solid(337,337,20,20),
-        new Solid(43,337,20,20),
-        new Solid(89,20,20,43),
-        new Solid(291,20,20,43),
-        new Solid(89,337,20,43),
-        new Solid(291,337,20,43),
-        new Solid(20,89,43,20),
-        new Solid(20,294,43,20),
-        new Solid(337,294,43,20),
-        new Solid(337,89,43,20),
-        new Solid(0,0,400,20),
-        new Solid(0,0,20,400),
-        new Solid(0,380,400,20),
-        new Solid(380,0,20,400),
-        new Solid(89,89,96,20),
-        new Solid(218,89,96,20),
-        new Solid(89,294,96,20),
-        new Solid(218,294,96,20),
-        new Solid(132,43,40,20),
-        new Solid(228,43,40,20),
-        new Solid(197,43,6,20),
-        new Solid(197,337,6,20),
-        new Solid(228,337,40,20),
-        new Solid(132,337,40,20),
-        new Solid(67,135,80,20),
-        new Solid(20,135,20,43),
-        new Solid(360,135,20,43),
-        new Solid(253,135,80,20),
-        new Solid(253,251,80,20),
-        new Solid(360,228,20,43),
-        new Solid(67,251,80,20),
-        new Solid(20,228,20,43),
-        new Solid(40,178,20,10),
-        new Solid(340,218,20,10),
-        new Solid(340,178,20,10),
-        new Solid(40,218,20,10),
-        new Solid(147,219,20,32),
-        new Solid(147,155,20,32),
-        new Solid(233,155,20,32),
-        new Solid(233,219,20,32),
-        new Solid(88,188,34,30),
-        new Solid(278,188,34,30),
-        new Solid(190,251,20,20),
-        new Solid(190,135,20,20)
-    ];
-
-var tom = new Player();
-    tom.color = "FF0000";
-    tom.x =110;
-    tom.y = 120;
-
-var ola = new Player();
-    ola.x = 346;
-    ola.y = 100;
+    new Solid(43,43,20,20),
+    new Solid(337,43,20,20),
+    new Solid(337,337,20,20),
+    new Solid(43,337,20,20),
+    new Solid(89,20,20,43),
+    new Solid(291,20,20,43),
+    new Solid(89,337,20,43),
+    new Solid(291,337,20,43),
+    new Solid(20,89,43,20),
+    new Solid(20,294,43,20),
+    new Solid(337,294,43,20),
+    new Solid(337,89,43,20),
+    new Solid(0,0,400,20),
+    new Solid(0,0,20,400),
+    new Solid(0,380,400,20),
+    new Solid(380,0,20,400),
+    new Solid(89,89,96,20),
+    new Solid(218,89,96,20),
+    new Solid(89,294,96,20),
+    new Solid(218,294,96,20),
+    new Solid(132,43,40,20),
+    new Solid(228,43,40,20),
+    new Solid(197,43,6,20),
+    new Solid(197,337,6,20),
+    new Solid(228,337,40,20),
+    new Solid(132,337,40,20),
+    new Solid(67,135,80,20),
+    new Solid(20,135,20,43),
+    new Solid(360,135,20,43),
+    new Solid(253,135,80,20),
+    new Solid(253,251,80,20),
+    new Solid(360,228,20,43),
+    new Solid(67,251,80,20),
+    new Solid(20,228,20,43),
+    new Solid(40,178,20,10),
+    new Solid(340,218,20,10),
+    new Solid(340,178,20,10),
+    new Solid(40,218,20,10),
+    new Solid(147,219,20,32),
+    new Solid(147,155,20,32),
+    new Solid(233,155,20,32),
+    new Solid(233,219,20,32),
+    new Solid(88,188,34,30),
+    new Solid(278,188,34,30),
+    new Solid(190,251,20,20),
+    new Solid(190,135,20,20)
+];
 
 //Flag spot
 var flagSpot = function(x,y,width,height){
@@ -132,13 +152,13 @@ var flagSpot = function(x,y,width,height){
 };
 
 var flagSpots = [
-        new flagSpot(flagy,flagx,30,30)
-    ];
+    new flagSpot(flagy,flagx,30,30)
+];
     
 //Home
 var Home = function(x,y,color){
-    this.x = homex;
-    this.y = homey;
+    this.x = x;
+    this.y = y;
     this.height = 23;
     this.width = 23;
     this.color = color;
@@ -150,70 +170,77 @@ var Home = function(x,y,color){
 };
 
 var homes = [
-    new Home(homex, homey, "FFA3A3")
-    ];
+    new Home(homex, homey, "FFA3A3"),
+    new Home(357, homey, "A3A3FF")
+];
 
 var update = function() {
     
 //Control
-    //Steering
-    if (input.keyIsPressed){
-        
-        if (input.keyIsPressed(input.keyCodes.down)) {
-            tom.y += tom.speedy;
-        }
-        if (input.keyIsPressed(input.keyCodes.up)) {
-            tom.y -= tom.speedy;
-        }
-        if (input.keyIsPressed(input.keyCodes.left)) {
-            tom.x -= tom.speedx;
-        }
-        if (input.keyIsPressed(input.keyCodes.right)) {
-            tom.x += tom.speedx;
-        }
-    }
-    
-    
-    for(var i=0;i<solids.length;i++) {
-        var blocket = solids[i];
-        //Collision with block
-       if (isCollidingCB(tom, blocket)){
-            if (input.keyIsPressed(input.keyCodes.down)) {
-                tom.y -= tom.speedy;
-            }
-            if (input.keyIsPressed(input.keyCodes.up)) {
-                tom.y += tom.speedy;
-            }
-            if (input.keyIsPressed(input.keyCodes.left)) {
-                tom.x += tom.speedx;
-            }
-            if (input.keyIsPressed(input.keyCodes.right)) {
-                tom.x -= tom.speedx;
-            }
-        }
-    }
+//Steering
 
-    var house = homes[0];
-    var flag = flagSpots[0];
+for (i in players){
+    var player = players [i];
+    if (input.keyIsPressed(player.keyDown)) {
+        player.y += player.speedy;
+    }
+    if (input.keyIsPressed(player.keyUp)) {
+        player.y -= player.speedy;
+    }
+    if (input.keyIsPressed(player.keyLeft)) {
+        player.x -= player.speedx;
+    }
+    if (input.keyIsPressed(player.keyRight)) {
+        player.x += player.speedx;
+    }
+}
+
+for(var i=0;i<solids.length;i++) {
+    var blocket = solids[i];
+    //Collision with block
+    for (p in players){
+       var player = players [p];
+       if (isCollidingCB(player, blocket)){
+            if (input.keyIsPressed(player.keyDown)) {
+                player.y -= player.speedy;
+            }
+            if (input.keyIsPressed(player.keyUp)) {
+                player.y += player.speedy;
+            }
+            if (input.keyIsPressed(player.keyLeft)) {
+                player.x += player.speedx;
+            }
+            if (input.keyIsPressed(player.keyRight)) {
+                player.x -= player.speedx;
+            }
+        }
+    }/**/
+}
+
+var house = homes[0];
+var flag = flagSpots[0];
     
 //Flag capture
-    if(isCollidingCB(tom,flag))
+for (p in players){
+       var player = players [p];
+    if(isCollidingCB(player,flag))
     {
-       tom.hasFlag=true;
+       player.hasFlag=true;
     }
  
 //Flag collecting
-    if (isCollidingCB(tom,house)){
-        tom.isHome=true;
+    if (isCollidingCB(player,house)){
+        player.isHome=true;
     }
     else{
-        tom.isHome=false;
+        player.isHome=false;
     }
     
-    if (tom.isHome&&tom.hasFlag){
-        tom.points += 1;
-        tom.hasFlag=false;
+    if (player.isHome&&player.hasFlag){
+        player.points += 1;
+        player.hasFlag=false;
     }
+}
 };
 
    
@@ -226,34 +253,32 @@ var draw = function() {
         flagSpots[i].draw();
     }
     
-    for(var o=0;o<1;o+=1) {
+    for(var o=0;o<homes.length;o+=1) {
         homes[o].draw();
-    }
-    tom.draw();
-    //ola.draw();
-    
+    } 
     for(var j=0;j<solids.length;j++) {
         solids[j].draw();
     }
-    
-    if (tom.hasFlag){
-        starWidth=2;
-        starHeight=19;
-        //image(flag,tom.x+-10,tom.y+-16,starWidth,starHeight);
-        graphics.fill("FFF700")
-        graphics.ellipse(tom.x+-3,tom.y+-3,starWidth)
+
+    for (p in players){
+       var player = players [p];
+        player.draw();
+        
+        if (player.hasFlag){
+            starWidth=2;
+            starHeight=19;
+            //image(flag,tom.x+-10,tom.y+-16,starWidth,starHeight);
+            graphics.fill("FFF700");
+            graphics.ellipse(player.x+-3,player.y+-3,starWidth);
+        }
+        
     }
-    else if (!tom.hasFlag) {
-      starWidth=0;
-      starHeight=0;
-    }
-  
-     if (tom.isHome&&tom.hasFlag){
-      graphics.ellipse(20,20,20);
-    }
-    graphics.fill("000000")
-    graphics.text(tom.points,5,20)
+
+    graphics.fill("000000");
+        graphics.text(tom.points,5,20);
+        graphics.text(ola.points,390,20);
 };
+
 
 
 var loop = function() {
