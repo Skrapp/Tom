@@ -22,57 +22,14 @@ var M=false;
 var starWidth=0;
 var starHeight=0;
 
-var isCollidingCB = function(first,second)
-{
-    return first.y + first.height/2 > second.y && first.x + first.width/2 > second.x  && first.x - first.width/2 < second.x + second.width && first.y - first.height/2< second.y + second.height;
-};
-
-//basic stuff
-    
+//basic stuff  
 //Home
-var Home = function(x,y,color){
-    this.x = x;
-    this.y = y;
-    this.height = 23;
-    this.width = 23;
-    this.color = color;
-    
-    this.draw = function() {
-        graphics.fill (this.color);
-        graphics.rect(this.x, this.y, this.width, this.height);
-    };
-};
-
 var homes = [
     new Home(homex, homey, "FFA3A3"),
     new Home(357, homey, "A3A3FF")
 ];
 
-var Player = function(){
-    this.x = 111;
-    this.y = 30;
-    this.height = 19;
-    this.width = 19;
-    this.speedx = 2.5;
-    this.speedy = 2.5;
-    this.hasFlag = false;
-    this.isHome = false;
-    this.points = 0;
-    this.color = "FF0000";
-    this.keyUp = 0;
-    this.keyDown = 0;
-    this.keyLeft = 0;
-    this.keyRight = 0;
-    this.home = null;
-
- 
-    this.draw = function() {
-        graphics.fill (this.color);
-        graphics.ellipse (this.x,this.y,this.height/2);
-    };
-};
-
-
+//players
 var tom = new Player();
     tom.color = "FF0000";
     tom.x =32;
@@ -99,19 +56,6 @@ var players = [
 ];
 
 //Block
-var Solid = function(x,y,width,height) {
-    this.x = x;
-    this.y = y;
-    this.height = height;
-    this.width = width;
-
-    
-    this.draw = function() {
-        graphics.fill ("696969");
-        graphics.rect (this.x,this.y,this.width,this.height);
-    };
-};
-
 var solids = [
     new Solid(43,43,20,20),
     new Solid(337,43,20,20),
@@ -162,18 +106,6 @@ var solids = [
 ];
 
 //Flag spot
-var flagSpot = function(x,y,width,height){
-    this.x = x;
-    this.y = y;
-    this.height = width;
-    this.width = height;
-
-    this.draw = function() {
-        graphics.fill("474747");
-        graphics.rect(this.x, this.y, this.width, this.height);
-    };
-};
-
 var flagSpots = [
     new flagSpot(flagy,flagx,30,30)
 ];
@@ -218,7 +150,7 @@ for(var i=0;i<solids.length;i++) {
                 player.x -= player.speedx;
             }
         }
-    }/**/
+    }
 }
 
 var flag = flagSpots[0];
