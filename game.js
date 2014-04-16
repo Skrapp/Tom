@@ -13,14 +13,14 @@ v0.2.6 Points are now added.
 */
 
 //Variabler
-var flagx=185;
-var flagy=185;
-var flag=null;
-var homex=20;
-var homey=20;
-var M=false;
-var starWidth=0;
-var starHeight=0;
+var flagx = 185;
+var flagy = 185;
+var flag = null;
+var homex = 20;
+var homey = 20;
+var M = false;
+var starWidth = 0;
+var starHeight = 0;
 
 //basic stuff  
 //Home
@@ -32,8 +32,8 @@ var homes = [
 //players
 var tom = new Player();
     tom.color = "FF0000";
-    tom.x =32;
-    tom.y = 32;
+    tom.x = 22;
+    tom.y = 22;
     tom.keyUp = input.keyCodes.up;
     tom.keyDown = input.keyCodes.down;
     tom.keyLeft = input.keyCodes.left;
@@ -42,8 +42,8 @@ var tom = new Player();
 
 var ola = new Player();
     ola.color = "0000FF";
-    ola.x = 368;
-    ola.y = 32;
+    ola.x = 359;
+    ola.y = 22;
     ola.keyUp = input.keyCodes.w;
     ola.keyDown = input.keyCodes.s;
     ola.keyLeft = input.keyCodes.a;
@@ -73,8 +73,8 @@ var solids = [
     new Solid(0,0,20,400),
     new Solid(0,380,400,20),
     new Solid(380,0,20,400),
-    new Solid(89,89,96,20),
-    new Solid(218,89,96,20),
+    new Solid(89,89,93,20),
+    new Solid(218,89,93,20),
     new Solid(89,294,96,20),
     new Solid(218,294,96,20),
     new Solid(132,43,40,20),
@@ -200,15 +200,15 @@ var draw = function() {
         player.draw();
         
         if (player.hasFlag){
-            starWidth=2;
-            starHeight=19;
+            starWidth=4;
+            starHeight=4;
             //image(flag,tom.x+-10,tom.y+-16,starWidth,starHeight);
             graphics.fill("FFF700");
-            graphics.ellipse(player.x+-3,player.y+-3,starWidth);
+            graphics.ellipse(player.x+4,player.y+4,starWidth,starHeight);
         }
         
     }
-
+    
     graphics.fill("000000");
         graphics.text(tom.points,5,20);
         graphics.text(ola.points,384,20);

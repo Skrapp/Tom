@@ -18,6 +18,6 @@ var Player = function(){
  
     this.draw = function() {
         graphics.fill (this.color);
-        graphics.ellipse (this.x,this.y,this.height/2);
+        graphics.ellipse (this.x,this.y,this.height, this.width);
     };
 };
