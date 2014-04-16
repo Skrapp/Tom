@@ -119,36 +119,50 @@ for (i in players){
     var player = players [i];
     if (input.keyIsPressed(player.keyDown)) {
         player.y += player.speedy;
+        
+        for (s in solids)
+        {
+            var solid = solids [s];
+             if (isCollidingCB(player, solid))
+             {
+                 player.y -= player.speedy;
+             }
+        }
     }
     if (input.keyIsPressed(player.keyUp)) {
         player.y -= player.speedy;
+        
+          for (s in solids)
+        {
+            var solid = solids [s];
+             if (isCollidingCB(player, solid))
+             {
+                 player.y += player.speedy;
+             }
+        }
     }
     if (input.keyIsPressed(player.keyLeft)) {
         player.x -= player.speedx;
+        
+          for (s in solids)
+        {
+            var solid = solids [s];
+             if (isCollidingCB(player, solid))
+             {
+                 player.x += player.speedx;
+             }
+        }
     }
     if (input.keyIsPressed(player.keyRight)) {
         player.x += player.speedx;
-    }
-}
-
-for(var i=0;i<solids.length;i++) {
-    var blocket = solids[i];
-    //Collision with block
-    for (p in players){
-       var player = players [p];
-       if (isCollidingCB(player, blocket)){
-            if (input.keyIsPressed(player.keyDown)) {
-                player.y -= player.speedy;
-            }
-            if (input.keyIsPressed(player.keyUp)) {
-                player.y += player.speedy;
-            }
-            if (input.keyIsPressed(player.keyLeft)) {
-                player.x += player.speedx;
-            }
-            if (input.keyIsPressed(player.keyRight)) {
-                player.x -= player.speedx;
-            }
+        
+          for (s in solids)
+        {
+            var solid = solids [s];
+             if (isCollidingCB(player, solid))
+             {
+                 player.x -= player.speedx;
+             }
         }
     }
 }
@@ -212,8 +226,9 @@ var draw = function() {
     graphics.fill("000000");
         graphics.text(tom.points,5,20);
         graphics.text(ola.points,384,20);
-};
 
+
+};
 
 
 var loop = function() {
