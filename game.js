@@ -22,6 +22,7 @@ var M = false;
 var starWidth = 0;
 var starHeight = 0;
 
+
 //basic stuff  
 //Home
 var homes = [
@@ -39,6 +40,7 @@ var tom = new Player();
     tom.keyLeft = input.keyCodes.left;
     tom.keyRight = input.keyCodes.right;
     tom.home = homes [0];
+    tom.shootButton = input.keyCodes.shift;
 
 var ola = new Player();
     ola.color = "0000FF";
@@ -49,6 +51,7 @@ var ola = new Player();
     ola.keyLeft = input.keyCodes.a;
     ola.keyRight = input.keyCodes.d;
     ola.home = homes [1];
+    ola.shootButton = input.keyCodes.space;
 
 var players = [
     tom,
@@ -119,6 +122,7 @@ for (i in players){
     var player = players [i];
     if (input.keyIsPressed(player.keyDown)) {
         player.y += player.speedy;
+         player.direction = Direction.down;
         
         for (s in solids)
         {
@@ -131,6 +135,7 @@ for (i in players){
     }
     if (input.keyIsPressed(player.keyUp)) {
         player.y -= player.speedy;
+         player.direction = Direction.up;
         
           for (s in solids)
         {
@@ -143,6 +148,7 @@ for (i in players){
     }
     if (input.keyIsPressed(player.keyLeft)) {
         player.x -= player.speedx;
+         player.direction = Direction.left;
         
           for (s in solids)
         {
@@ -155,6 +161,7 @@ for (i in players){
     }
     if (input.keyIsPressed(player.keyRight)) {
         player.x += player.speedx;
+        player.direction = Direction.right;
         
           for (s in solids)
         {
@@ -166,9 +173,28 @@ for (i in players){
         }
     }
 }
-
-var flag = flagSpots[0];
     
+    if (tom.direction == Direction.right)
+    {
+        console.log("right");
+    }
+    
+
+if(input.keyIsPressed(tom.shootButton) && ! tom.isShooting)
+    {
+        shots.push( new Shot (tom.x + (tom.width-6), tom.y + (tom.height/2) - 1.5, "FFFFFF"));
+        tom.isShooting = true;
+        console.log("shot");
+    }
+    
+    if (! input.keyIsPressed(tom.shootButton))
+    {
+        tom.isShooting = false;
+
+    } 
+
+        var flag = flagSpots[0];
+        
 //Flag capture
 for (p in players){
        var player = players [p];
@@ -190,10 +216,24 @@ for (p in players){
         player.hasFlag=false;
     }
 }
+/*    
+if (input.keyIsPressed(tom.shootButton))
+{
+    console.log("shoot");
+}
+  */  
+     for (o in shots) 
+    {
+        var shot = shots [o];
+        shot.x += shot.speed;
+    }
+
 };
-
+//Shots
+var shots = [ 
+];
    
-
+//Draw out
 var draw = function() {
 	graphics.fill("CCCCCC");
     graphics.rect(0,0,800,600);
@@ -223,11 +263,16 @@ var draw = function() {
         
     }
     
+    
+        for (b in shots){
+            var shot = shots [b];
+            shot.draw (0);
+        }
+    
     graphics.fill("000000");
         graphics.text(tom.points,5,20);
         graphics.text(ola.points,384,20);
-
-
+    
 };
 
 

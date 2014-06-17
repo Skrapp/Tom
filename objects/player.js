@@ -14,10 +14,20 @@ var Player = function(){
     this.keyLeft = 0;
     this.keyRight = 0;
     this.home = null;
-
+    this.shootButton = null;
+    this.isShooting = false;
+    this.direction = null;
  
     this.draw = function() {
         graphics.fill (this.color);
         graphics.ellipse (this.x,this.y,this.height, this.width);
     };
 };
+
+var Direction =  
+    {
+        up: 0,
+        down: 1,
+        right: 2, 
+        left: 3
+    }
