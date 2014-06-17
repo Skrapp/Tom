@@ -1,4 +1,4 @@
-var Shot = function(x,y,color,direction) {
+var Shot = function(x,y,color,direction, player) {
     this.x = x;
     this.y = y;
     this.height = 3;
@@ -6,6 +6,7 @@ var Shot = function(x,y,color,direction) {
     this.speed = 5;
     this.direction = direction;
     this.color = color;
+    this.owner = player;
     
     this.draw = function() {
         graphics.fill (this.color);

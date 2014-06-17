@@ -17,6 +17,7 @@ var Player = function(){
     this.shootButton = null;
     this.isShooting = false;
     this.direction = null;
+    this.life = 1;
  
     this.draw = function() {
         graphics.fill (this.color);
