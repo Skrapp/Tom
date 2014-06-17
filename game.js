@@ -174,26 +174,7 @@ for (i in players){
     }
 }
     
-    if (tom.direction == Direction.right)
-    {
-        console.log("right");
-    }
-    
-
-if(input.keyIsPressed(tom.shootButton) && ! tom.isShooting)
-    {
-        shots.push( new Shot (tom.x + (tom.width-6), tom.y + (tom.height/2) - 1.5, "FFFFFF"));
-        tom.isShooting = true;
-        console.log("shot");
-    }
-    
-    if (! input.keyIsPressed(tom.shootButton))
-    {
-        tom.isShooting = false;
-
-    } 
-
-        var flag = flagSpots[0];
+var flag = flagSpots[0];
         
 //Flag capture
 for (p in players){
@@ -221,11 +202,43 @@ if (input.keyIsPressed(tom.shootButton))
 {
     console.log("shoot");
 }
-  */  
+  */ 
+    
+if(input.keyIsPressed(tom.shootButton) && ! tom.isShooting)
+    {
+        shots.push(new Shot (tom.x + (tom.width-6), tom.y + (tom.height/2) - 1.5, "FFFFFF", tom.direction));
+        tom.isShooting = true;
+        console.log("shot");
+    }
+    
+    if (! input.keyIsPressed(tom.shootButton))
+    {
+        tom.isShooting = false;
+    } 
+
      for (o in shots) 
     {
         var shot = shots [o];
+        
+        if (shot.direction == Direction.down)
+        {
+        shot.y += shot.speed;
+        }
+        
+        if (shot.direction == Direction.up)
+        {
+        shot.y -= shot.speed;
+        }
+        
+        if (shot.direction == Direction.right)
+        {
         shot.x += shot.speed;
+        }
+        
+        if (shot.direction == Direction.left)
+        {
+        shot.x -= shot.speed;
+        }
     }
 
 };
@@ -256,7 +269,6 @@ var draw = function() {
         if (player.hasFlag){
             starWidth=4;
             starHeight=4;
-            //image(flag,tom.x+-10,tom.y+-16,starWidth,starHeight);
             graphics.fill("FFF700");
             graphics.ellipse(player.x+4,player.y+4,starWidth,starHeight);
         }
