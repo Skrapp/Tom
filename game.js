@@ -164,7 +164,7 @@ for (i in players){
         player.direction = Direction.right;
         
           for (s in solids)
-        {
+        {var solid = solids [s];
             var solid = solids [s];
              if (isCollidingCB(player, solid))
              {
@@ -197,13 +197,8 @@ for (p in players){
         player.hasFlag=false;
     }
 }
-/*    
-if (input.keyIsPressed(tom.shootButton))
-{
-    console.log("shoot");
-}
-  */ 
-    
+
+//Shooting    
 if(input.keyIsPressed(tom.shootButton) && ! tom.isShooting)
     {
         shots.push(new Shot (tom.x + (tom.width-6), tom.y + (tom.height/2) - 1.5, "FFFFFF", tom.direction));
@@ -239,10 +234,20 @@ if(input.keyIsPressed(tom.shootButton) && ! tom.isShooting)
         {
         shot.x -= shot.speed;
         }
+        
+        for (l in solids)
+        {
+        var solid = solids [l];
+            if (isCollidingCB(shot, player) || isCollidingCB(shot, solid))
+            {
+                console.log("hit");
+                shots.splice(o, 1);
+            }  
+        }
     }
+    
+    };
 
-};
-//Shots
 var shots = [ 
 ];
    
