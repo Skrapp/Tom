@@ -6,7 +6,11 @@ var Solid = function(x,y,width,height) {
 
     
     this.draw = function() {
-        graphics.fill ("696969");
-        graphics.rect (this.x,this.y,this.width,this.height);
+		
+		
+        graphics.img(bye,this.x,this.y,this.width,this.height);
     };
 };
+
+var bye = new Image();
+bye.src = 'image/tom-solids-purpel%201.jpeg';
