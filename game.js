@@ -124,6 +124,7 @@ for (i in players){
     if (input.keyIsPressed(player.keyDown)) {
         player.y += player.speedy;
          player.direction = Direction.down;
+		player.rotation = 180;
         
         for (s in solids)
         {
@@ -136,7 +137,8 @@ for (i in players){
     }
     if (input.keyIsPressed(player.keyUp)) {
         player.y -= player.speedy;
-         player.direction = Direction.up;
+        player.direction = Direction.up;
+		player.rotation = 0;
         
           for (s in solids)
         {
@@ -149,7 +151,8 @@ for (i in players){
     }
     if (input.keyIsPressed(player.keyLeft)) {
         player.x -= player.speedx;
-         player.direction = Direction.left;
+        player.direction = Direction.left;
+		player.rotation = 270;
         
           for (s in solids)
         {
@@ -163,6 +166,7 @@ for (i in players){
     if (input.keyIsPressed(player.keyRight)) {
         player.x += player.speedx;
         player.direction = Direction.right;
+		player.rotation = 90;
         
           for (s in solids)
         {var solid = solids [s];
@@ -207,7 +211,6 @@ for (p in players){
         {
             shots.push(new Shot (player.x + (player.width-6), player.y + (player.height/2) - 1.5, "FFFFFF", player.direction, player));
             player.isShooting = true;
-            console.log("shot");
         }
 
         if (! input.keyIsPressed(player.shootButton))

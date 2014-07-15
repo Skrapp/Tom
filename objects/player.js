@@ -1,8 +1,8 @@
 var Player = function(){
     this.x = 111;
     this.y = 30;
-    this.height = 19;
-    this.width = 19;
+    this.height = 20;
+    this.width = 20;
     this.speedx = 2.5;
     this.speedy = 2.5;
     this.hasFlag = false;
@@ -18,12 +18,16 @@ var Player = function(){
     this.isShooting = false;
     this.direction = null;
     this.life = 1;
+	this.rotation = 0;
+	
  
     this.draw = function() {
-        graphics.fill (this.color);
-        graphics.ellipse (this.x,this.y,this.height, this.width);
+			graphics.img(this.rotation,plimg,this.x,this.y,this.width,this.height+9);
     };
 };
+
+var plimg = new Image();
+plimg.src = 'image/player-tom.png';
 
 var Direction =  
     {
@@ -32,3 +36,4 @@ var Direction =
         right: 2, 
         left: 3
     }
+			
