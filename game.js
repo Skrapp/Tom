@@ -42,6 +42,7 @@ var tom = new Player();
     tom.keyRight = input.keyCodes.right;
     tom.home = homes [0];
     tom.shootButton = input.keyCodes.shift;
+	tom.imgname = imgTom;
 
 var ola = new Player();
     ola.color = "0000FF";
@@ -53,6 +54,7 @@ var ola = new Player();
     ola.keyRight = input.keyCodes.d;
     ola.home = homes [1];
     ola.shootButton = input.keyCodes.space;
+	ola.imgname = imgOla;
 
 var players = [
     tom,

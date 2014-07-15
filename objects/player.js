@@ -19,15 +19,14 @@ var Player = function(){
     this.direction = null;
     this.life = 1;
 	this.rotation = 0;
+	this.fire = 9;
+	this.imgname = null;
 	
  
     this.draw = function() {
-			graphics.img(this.rotation,plimg,this.x,this.y,this.width,this.height+9);
+			graphics.img(this.rotation,this.imgname,this.x-this.fire,this.y-this.fire,this.width+this.fire*2,this.height+this.fire*2);
     };
 };
-
-var plimg = new Image();
-plimg.src = 'image/player-tom.png';
 
 var Direction =  
     {
