@@ -22,7 +22,7 @@ var homey = 20;
 var M = false;
 var starWidth = 0;
 var starHeight = 0;
-
+var frameNr = 0;
 
 //basic stuff  
 //Home
@@ -42,7 +42,10 @@ var tom = new Player();
     tom.keyRight = input.keyCodes.right;
     tom.home = homes [0];
     tom.shootButton = input.keyCodes.shift;
-	tom.imgname = imgTom;
+	tom.imgname0 = imgTom0;
+	tom.imgname1 = imgTom1;
+	tom.imgname2 = imgTom;
+	tom.imgname = imgTom0;
 
 var ola = new Player();
     ola.color = "0000FF";
@@ -54,8 +57,11 @@ var ola = new Player();
     ola.keyRight = input.keyCodes.d;
     ola.home = homes [1];
     ola.shootButton = input.keyCodes.space;
-	ola.imgname = imgOla;
-
+	ola.imgname0 = imgOla0;
+	ola.imgname1 = imgOla1;
+	ola.imgname2 = imgOla;
+	ola.imgname = imgOla1;
+	
 var players = [
     tom,
     ola
@@ -125,9 +131,9 @@ for (i in players){
     var player = players [i];
     if (input.keyIsPressed(player.keyDown)) {
         player.y += player.speedy;
-         player.direction = Direction.down;
+        player.direction = Direction.down;
 		player.rotation = 180;
-        
+		
         for (s in solids)
         {
             var solid = solids [s];
@@ -179,6 +185,30 @@ for (i in players){
              }
         }
     }
+	
+	if (input.keyIsPressed(player.keyUp) || input.keyIsPressed(player.keyDown) || input.keyIsPressed(player.keyLeft)|| input.keyIsPressed(player.keyRight)){
+		if (frameNr % 10 == 0) 
+			{
+				if (player.pictureNr == 0)
+				{
+					player.imgname = player.imgname0;
+					player.pictureNr ++;
+					//console.log (0);
+				}
+
+				else 
+				{
+					player.imgname = player.imgname1;
+					player.pictureNr --;
+					//console.log (1);
+				}
+			}
+	}
+	else 
+	{
+		player.imgname = player.imgname2;
+	}
+	
 }
     
 var flag = flagSpots[0];
@@ -211,7 +241,7 @@ for (p in players){
     
     if(input.keyIsPressed(player.shootButton) && ! player.isShooting)
         {
-            shots.push(new Shot (player.x + (player.width-6), player.y + (player.height/2) - 1.5, "FFFFFF", player.direction, player));
+            shots.push(new Shot (player.x + player.width/2 - 2.5, player.y + player.height/2 - 1.5, "FFFFFF", player.direction, player));
             player.isShooting = true;
         }
 
@@ -222,8 +252,6 @@ for (p in players){
     
         if (player.life <= 0)
         {
-            console.log("dead");
-
             player.life ++;
         }
 }
@@ -257,7 +285,6 @@ for (p in players){
             var solid = solids [l];
                 if (isCollidingCB(shot, solid))
                 {
-                    console.log("hit");
                     shots.splice(o, 1);
                 } 
             }
@@ -272,11 +299,10 @@ for (p in players){
                         player.x = player.home.x + 3;
                         player.y = player.home.y + 3;
                         player.hasFlag = false;
-                        console.log(ola.life);
-                        console.log(tom.life);
                     }
             }  
         }
+	
 };
 
 var shots = [ 
@@ -284,6 +310,9 @@ var shots = [
    
 //Draw out
 var draw = function() {
+	
+	frameNr ++;
+	
 	graphics.fill("CCCCCC");
     graphics.rect(0,0,800,600);
 

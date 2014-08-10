@@ -20,13 +20,20 @@ var Player = function(){
     this.life = 1;
 	this.rotation = 0;
 	this.fire = 9;
+	this.imgname0 = null;
+	this.imgname1 = null;
+	this.imgname2 = null;
 	this.imgname = null;
-	
+	this.pictureNr = 0;
+	this.frameNr = 0;
  
+	
     this.draw = function() {
 			graphics.img(this.rotation,this.imgname,this.x-this.fire,this.y-this.fire,this.width+this.fire*2,this.height+this.fire*2);
+			//console.log (0);
+		
+		};		
     };
-};
 
 var Direction =  
     {
