@@ -67,9 +67,56 @@ var players = [
     ola
 ];
 
+//Flag spot
+var flagSpots = [
+    new flagSpot(flagy,flagx,30,30)
+];
+
+//Stage building
+
+var invCan = document.createElement('canvas');
+
+stage1.onload = function (){
+	
+invCan.width = stage1.width;
+invCan.height = stage1.height;
+
+var ctx = invCan.getContext('2d');
+	
+var pxy = 0;
+	
+ctx.drawImage(stage1,0,0,stage1.width,stage1.height);
+
+var imgData = ctx.getImageData(0,0,stage1.width, stage1.height);
+	
+	for (var i=0;i<imgData.data.length;i+=4)
+		{
+			red=imgData.data[i];
+			green=imgData.data[i+1];
+			blue=imgData.data[i+2];
+			alpha=imgData.data[i+3];
+			pxx = i/4 % 20;
+			if ((i/4 % 20 == 0 && ! (i == 0))) {
+			pxy++;
+			}
+			console.log("Pixel "+(i/4)+": "+red+" "+green+" "+blue);
+			console.log("x: "+(i/4 % 20)+" y: "+pxy);
+			if (red == 0 && green == 0 && blue == 0) 
+			{
+				solids.push(new Solid(pxx * 20, pxy * 20, 20, 20, bas1));
+			}
+			
+			if (red == 20 && green == 20 && blue == 20)
+			{
+				solids.push(new Solid(pxx * 20, pxy * 20, 20, 20, bas2));
+			}
+		}
+	
+}
+
 //Block
-var solids = [
-    new Solid(43,43,20,20),
+var solids = new Array();
+    /*new Solid(43,43,20,20),
     new Solid(337,43,20,20),
     new Solid(337,337,20,20),
     new Solid(43,337,20,20),
@@ -114,13 +161,10 @@ var solids = [
     new Solid(88,188,34,30),
     new Solid(278,188,34,30),
     new Solid(190,251,20,20),
-    new Solid(190,135,20,20)
-];
+    new Solid(190,135,20,20)*/
+//];
 
-//Flag spot
-var flagSpots = [
-    new flagSpot(flagy,flagx,30,30)
-];
+
 
 var update = function() {
     
