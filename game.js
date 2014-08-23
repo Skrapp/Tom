@@ -110,6 +110,26 @@ var imgData = ctx.getImageData(0,0,stage1.width, stage1.height);
 			{
 				solids.push(new Solid(pxx * 20, pxy * 20, 20, 20, bas2));
 			}
+			
+			if (red == 0 && green == 0 && blue == 100)
+			{
+				solids.push(new Solid(pxx * 20, pxy * 20, 20, 20, blu));
+			}
+			
+			if (red == 100 && green == 0 && blue == 0)
+			{
+				solids.push(new Solid(pxx * 20, pxy * 20, 20, 20, reed));
+			}
+			
+			if (red == 0 && green == 100 && blue == 0)
+			{
+				solids.push(new Solid(pxx * 20, pxy * 20, 20, 20, gree));
+			}
+			
+			if (red == 100 && green == 100 && blue == 0)
+			{
+				solids.push(new Solid(pxx * 20, pxy * 20, 20, 20, yel));
+			}
 		}
 	
 }

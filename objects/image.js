@@ -5,6 +5,18 @@ bas1.src = 'image/solids-basic1.png';
 var bas2 = new Image ();
 bas2.src = 'image/solids-basic2.png';
 
+var blu = new Image();
+blu.src = 'image/solids-blue.png';
+
+var reed = new Image();
+reed.src = 'image/solids-red.png';
+
+var gree = new Image();
+gree.src = 'image/solids-green.png';
+
+var yel = new Image();
+yel.src = 'image/solids-yellow.png';
+
 //players
 var imgTom = new Image();
 imgTom.src = 'image/player-tom.png';
