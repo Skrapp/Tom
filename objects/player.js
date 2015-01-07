@@ -1,8 +1,8 @@
 var Player = function(){
     this.x = 111;
     this.y = 30;
-    this.height = 15;
-    this.width = 15;
+    this.height = 17;
+    this.width = 17;
     this.speedx = 2.5;
     this.speedy = 2.5;
     this.hasFlag = false;

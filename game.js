@@ -72,6 +72,11 @@ var flagSpots = [
     new flagSpot(flagy,flagx,30,30)
 ];
 
+//Powerups
+var powerups = [
+    new powerup(190,150,10,10)
+];
+
 //Stage building
 
 var invCan = document.createElement('canvas');
@@ -297,8 +302,18 @@ for (p in players){
         player.points += 1;
         player.hasFlag=false;
     }
+    
+//Powerup
+    for (u in powerup){
+            var powerup = powerups [u];
+        if (isCollidingCB(player, powerup))
+        {
+            player.speedx = 7;
+            player.speedy = 7;
+        }
+    }
 }
-
+    
 //Shooting   
 for (p in players){
     var player = players [p];
@@ -309,12 +324,12 @@ for (p in players){
             player.isShooting = true;
         }
 
-        if (! input.keyIsPressed(player.shootButton))
+    if (! input.keyIsPressed(player.shootButton))
         {
             player.isShooting = false;
         } 
     
-        if (player.life <= 0)
+    if (player.life <= 0)
         {
             player.life ++;
         }
@@ -363,6 +378,10 @@ for (p in players){
                         player.x = player.home.x + 3;
                         player.y = player.home.y + 3;
                         player.hasFlag = false;
+                            if (player.points >0)
+                            {
+                                player.points -= 1;
+                            }
                     }
             }  
         }
@@ -390,6 +409,10 @@ var draw = function() {
     for(var j=0;j<solids.length;j++) {
         solids[j].draw();
     }
+    
+    for (var p=0;p<powerups.length;p++) {
+        powerups[p].draw();
+    }
 
     for (p in players){
        var player = players [p];
@@ -405,10 +428,10 @@ var draw = function() {
     }
     
     
-        for (b in shots){
-            var shot = shots [b];
-            shot.draw (0);
-        }
+    for (b in shots){
+        var shot = shots [b];
+        shot.draw (0);
+    }
     
     graphics.fill("000000");
         graphics.text(tom.points,5,20);
