@@ -74,7 +74,11 @@ var flagSpots = [
 
 //Powerups
 var powerups = [
-	new powerup(190,150,10,10)
+	new powerup(190,150,10, 10),
+    new powerup(135, 25, 10, 10),
+    new powerup(255, 25, 10, 10),
+    new powerup(135, 365, 10, 10),
+    new powerup(255, 365, 10, 10)
 ];
 
 //Stage building
@@ -254,7 +258,7 @@ var update = function() {
 			player.hasFlag=false;
 		}
 
-		//Powerup
+		//Picking up powerup
 		for (u in powerups){
 			var powerup = powerups [u];
 			if (isCollidingCB(player, powerup))
@@ -262,8 +266,22 @@ var update = function() {
 				powerups.splice(u,1);
 				player.speedx += 1;
 				player.speedy += 1;
+                player.pu = true;
 			}
 		}
+        
+        if (player.pu)
+        {
+            player.puframe ++
+        }
+        
+        if (player.puframe > 100)
+        {
+            player.puframe = 0;
+            player.pu = false;
+            player.speedx = 3;
+            player.speedy = 3;
+        }
 	}
 
 	//Shooting   

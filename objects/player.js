@@ -3,8 +3,8 @@ var Player = function(){
     this.y = 30;
     this.height = 17;
     this.width = 17;
-    this.speedx = 2.5;
-    this.speedy = 2.5;
+    this.speedx = 3;
+    this.speedy = 3;
     this.hasFlag = false;
     this.isHome = false;
     this.points = 0;
@@ -26,6 +26,8 @@ var Player = function(){
 	this.imgname = null;
 	this.pictureNr = 0;
 	this.frameNr = 0;
+    this.pu = false;
+    this.puframe = 0;
  
 	
     this.draw = function() {
